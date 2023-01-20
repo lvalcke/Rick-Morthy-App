@@ -1,0 +1,15 @@
+.cards{
+    display:flex ;
+    flex-direction: row;
+    justify-content:space-evenly;
+    margin: auto;
+    height: 35rem;
+    width: 70%;
+    background-color: blue;
+    align-items: center;
+    border-radius: 3rem;
+    padding: 1rem;
+    background-image: url('https://i.pinimg.com/originals/64/5c/8d/645c8d877f6e2aad7fa6545140c72a52.gif');
+    background-size:130% 110% ;
+    background-position: center;
+ };

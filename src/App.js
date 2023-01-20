@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Cards from './components/Cards/Cards.jsx'
+import NavBar from './components/NavBar/NavBar.jsx'
+import { useState } from 'react'
 
-function App() {
+
+function App () { 
+
+  const handleClose = () => window.alert('Emulamos que se cierra la card'); 
+  
+  const [characters,setCharacters] = useState([])
+
+   const onSearch = (character) => {
+    fetch(`https://rickandmortyapi.com/api/character/${character}`)
+       .then((response) => response.json())
+       .then((data) => {
+          if (data.name) {
+            const newCharacter = {
+            id:data.id,  
+            name: data.name,
+            species: data.species,
+            gender: data.gender,
+            image:data.image}
+            setCharacters((oldChars) => [...oldChars, newCharacter]);
+            console.log(characters) 
+          } else {
+             window.alert('No hay personajes con ese ID');
+          }
+       });
+ }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App' >
+      <NavBar onSearch = {onSearch} />
+      <hr />
+      <Cards characters={characters} onClose={handleClose}/>
+      <hr />
+      
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
